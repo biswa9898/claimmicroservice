@@ -11,7 +11,7 @@ namespace claimmicroservice.Repository
 {
     public class memberclaimrepo : Imemberclaimrepo
     {
-        Uri baseAddress = new Uri("https://localhost:44367/api");   //Port No.
+        Uri baseAddress = new Uri("http://20.193.144.18/api");   //Port No.
         HttpClient client; 
         public memberclaimrepo()
         {
@@ -110,12 +110,12 @@ namespace claimmicroservice.Repository
             int p = 0;
             int op = 0;
 
-            HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/policy/1/2").Result;//[100,200,300,400]]
+            /*HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/policy/1/2").Result;//[100,200,300,400]]
             if (response.IsSuccessStatusCode)
             {
                 string data = response.Content.ReadAsStringAsync().Result;
                 ls = JsonConvert.DeserializeObject<List<int>>(data);
-            }
+            } */
             HttpResponseMessage response1 = client.GetAsync(client.BaseAddress + "/policy/" + id).Result;//used to fetch the policyid of that particular memberid
             if (response1.IsSuccessStatusCode)
             {
@@ -155,7 +155,7 @@ namespace claimmicroservice.Repository
             if (qo == 0)
                 obj.claimstatus = "REJECTED";
             memberclaimrepo x = new memberclaimrepo();
-            foreach (var item in memberclaimrepo.m)
+            foreach (memberclaim item in m)
             {
                 if (item.claimid == obj.claimid)
                     item.claimstatus = obj.claimstatus;
